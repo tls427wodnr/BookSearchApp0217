@@ -54,5 +54,9 @@ extension BookListView: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = books[indexPath.row].title
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(books[indexPath.row].title)")
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
-
