@@ -29,14 +29,15 @@ class ViewController: UIViewController, BookListViewDelegate {
     }
     
     private func setupBookListView() {
-        view.addSubview(bookListView)
+        addChild(bookListView)
+        view.addSubview(bookListView.view)
         bookListView.delegate = self
-        bookListView.translatesAutoresizingMaskIntoConstraints = false
+        bookListView.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            bookListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            bookListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            bookListView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bookListView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            bookListView.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            bookListView.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bookListView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bookListView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     

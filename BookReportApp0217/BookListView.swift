@@ -11,22 +11,17 @@ protocol BookListViewDelegate: AnyObject {
     func loadMoreBooks()
 }
 
-class BookListView: UIView {
-    weak var delegate: BookListViewDelegate? 
+class BookListView: UIViewController {
+    weak var delegate: BookListViewDelegate?
     private var books: [BookItem] = []
     private let tableView = UITableView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func viewDidLoad() {
         configureTableView()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func configureTableView() {
-        addSubview(tableView)
+        view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 100
@@ -34,10 +29,10 @@ class BookListView: UIView {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         tableView.backgroundColor = .systemGray6
     }
@@ -61,7 +56,9 @@ extension BookListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(books[indexPath.row].title)")
+        let detailVC = DetailViewController()
+        detailVC.bookItem = books[indexPath.row]
+        navigationController?.pushViewController(detailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
