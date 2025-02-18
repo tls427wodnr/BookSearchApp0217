@@ -13,9 +13,9 @@ class BookAPIManager {
     
     private init() {}
     
-    func fetchBooksAPI(query: String ,completion: @escaping ([BookItem]?) -> Void) {
+    func fetchBooksAPI(query: String, start: Int ,completion: @escaping ([BookItem]?) -> Void) {
         let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
-        let urlString = "https://openapi.naver.com/v1/search/book.json?query=\(encodedQuery)&display=30&start=1"
+        let urlString = "https://openapi.naver.com/v1/search/book.json?query=\(encodedQuery)&display=30&start=\(start)"
         let clientID = "b_SBPPToABAxSCsD3Y77"
         let clientSecret = "2XZKYvE2SK"
         
