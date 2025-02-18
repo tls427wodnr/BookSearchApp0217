@@ -4,3 +4,4 @@
 - 상세 페이지
 
 # 시연 영상
+https://tlswodnr427.tistory.com/24
