@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     
     private func setupSearchBar() {
         searchController.searchBar.delegate = self
-        searchController.searchBar.backgroundColor = .white
         navigationItem.searchController = searchController
     }
     
