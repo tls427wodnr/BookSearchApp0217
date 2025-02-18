@@ -11,12 +11,19 @@ class ViewController: UIViewController {
     
     private var myBooks: [BookItem] = []
     private let bookListView = BookListView()
+    private let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .white
         setupBookListView()
-        fetchBooks(query: "코딩")
+        setupSearchBar()
+    }
+    
+    private func setupSearchBar() {
+        searchController.searchBar.delegate = self
+        searchController.searchBar.backgroundColor = .white
+        navigationItem.searchController = searchController
     }
     
     private func setupBookListView() {
@@ -42,3 +49,10 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        fetchBooks(query: searchText)
+        searchBar.resignFirstResponder()
+    }
+}
