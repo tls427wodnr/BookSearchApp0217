@@ -54,4 +54,14 @@ extension ViewController: UISearchBarDelegate {
         fetchBooks(query: searchText)
         searchBar.resignFirstResponder()
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.bookListView.updateBooks([])
+        searchBar.resignFirstResponder()
+    }
+    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        print("검색어 변경됨: \(searchText)")
+//        fetchBooks(query: searchText)
+//    }
 }
