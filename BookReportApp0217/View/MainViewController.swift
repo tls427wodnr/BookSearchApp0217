@@ -59,7 +59,7 @@ extension MainViewController: UISearchBarDelegate {
     }
 }
 
-extension MainViewController: UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookViewModel.getBooks().count
