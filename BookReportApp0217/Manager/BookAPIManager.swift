@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BookAPIManager {
+final class BookAPIManager {
     
     static let shared = BookAPIManager()
     
