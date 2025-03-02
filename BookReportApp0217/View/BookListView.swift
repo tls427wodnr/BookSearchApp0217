@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BookListView: UIView {
+final class BookListView: UIView {
     
     private var bookViewModel: BookViewModel
         

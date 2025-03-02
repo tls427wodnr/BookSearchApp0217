@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewModel {
+final class DetailViewModel {
     
     private var bookItem: BookItem?
 

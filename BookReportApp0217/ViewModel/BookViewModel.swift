@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BookViewModel {
+final class BookViewModel {
     var onBooksUpdated: (() -> Void)?
     
     private var currentPage = 1

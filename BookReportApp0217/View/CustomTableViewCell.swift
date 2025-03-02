@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+final class CustomTableViewCell: UITableViewCell {
     var bookImage = UIImageView()
     var bookTitle = UILabel()
     var bookAuthor = UILabel()
