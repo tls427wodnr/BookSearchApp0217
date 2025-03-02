@@ -46,15 +46,13 @@ class MainViewController: UIViewController {
 extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
-        bookViewModel.currentPage = 1
+        bookViewModel.resetSearch(clearPage: true)
         bookViewModel.fetchBooks(query: searchText, start: 1)
         searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        bookViewModel.currentQuery = ""
-        bookViewModel.currentPage = 1
-        bookViewModel.clearBooks()
+        bookViewModel.resetSearch(clearQuery: true, clearPage: true, clearBooks: true)
         searchBar.resignFirstResponder()
     }
 }
@@ -75,7 +73,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let books = bookViewModel.getBooks()
         let detailVC = DetailViewController()
-        detailVC.bookItem = books[indexPath.row]
+        detailVC.detailViewModel = DetailViewModel(bookItem: books[indexPath.row])
         navigationController?.pushViewController(detailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

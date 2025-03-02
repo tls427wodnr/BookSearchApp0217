@@ -9,7 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var bookItem: BookItem?
+    var detailViewModel: DetailViewModel!
     
     var detailViewImage = UIImageView()
     var detailViewTitle = UILabel()
@@ -19,26 +19,25 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        loadImage()
         setupUI()
     }
     
     func setupUI(){
-        configureImage(imageURL: bookItem?.image ?? "")
         detailViewImage.translatesAutoresizingMaskIntoConstraints = false
         detailViewImage.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
-            detailViewImage.heightAnchor.constraint(equalToConstant: 300),
+            detailViewImage.heightAnchor.constraint(equalTo: detailViewImage.widthAnchor),
         ])
-        
-        detailViewTitle.text = bookItem?.title
+        detailViewTitle.text = detailViewModel.title
         detailViewTitle.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         detailViewTitle.numberOfLines = 0
         detailViewTitle.lineBreakMode = .byWordWrapping
         
-        detailViewAuthor.text = bookItem?.author
+        detailViewAuthor.text = detailViewModel.author
         detailViewAuthor.font = UIFont.systemFont(ofSize: 17)
         
-        detailViewDescription.text = bookItem?.description
+        detailViewDescription.text = detailViewModel.description
         detailViewDescription.font = UIFont.systemFont(ofSize: 15)
         detailViewDescription.textColor = .gray
         detailViewDescription.numberOfLines = 0
@@ -72,15 +71,10 @@ class DetailViewController: UIViewController {
         stackView.setCustomSpacing(20, after: detailViewImage)
     }
     
-    func configureImage(imageURL: String) {
-        if let url = URL(string: imageURL) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data, let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self.detailViewImage.image = image
-                    }
-                }
-            }.resume()
+    func loadImage() {
+        detailViewModel.fetchImage { [weak self] image in
+            self?.detailViewImage.image = image ?? UIImage(systemName: "photo")
         }
     }
+
 }

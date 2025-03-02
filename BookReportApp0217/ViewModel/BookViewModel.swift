@@ -10,8 +10,8 @@ import Foundation
 class BookViewModel {
     var onBooksUpdated: (() -> Void)?
     
-    var currentPage = 1
-    var currentQuery: String = ""
+    private var currentPage = 1
+    private var currentQuery: String = ""
     private var isLoading = false
     
     private var books: [BookItem] = [] {
@@ -31,9 +31,17 @@ class BookViewModel {
     func setBooks(books: [BookItem]) {
         self.books = books
     }
-    
-    func clearBooks() {
-        self.books = []
+        
+    func resetSearch(clearQuery: Bool = false, clearPage: Bool = false, clearBooks: Bool = false) {
+        if clearQuery {
+            currentQuery = ""
+        }
+        if clearPage {
+            currentPage = 1
+        }
+        if clearBooks {
+            self.books = []
+        }
     }
     
     func fetchBooks(query: String, start: Int) {
